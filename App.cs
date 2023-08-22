@@ -1,3 +1,4 @@
+using AVM.Views;
 using Microsoft.UI.Xaml;
 
 namespace AVM;

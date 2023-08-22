@@ -1,0 +1,38 @@
+<Window
+  x:Class="AVM.Views.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:models="using:AVM.Models"
+  xmlns:views="using:AVM.Views"
+  Title="AVM">
+
+  <StackPanel>
+
+    <!-- Device Selector -->
+    <ComboBox
+      ItemsSource="{x:Bind VM.Devices}"
+      DisplayMemberPath="Name"
+      SelectedItem="{x:Bind VM.SelectedDevice, Mode=TwoWay}"/>
+
+    <StackPanel Orientation="Horizontal">
+
+      <!-- Device Master Volume Mixer -->
+      <views:VolumeSlider DataContext="{x:Bind VM.SelectedDevice, Mode=OneWay}"/>
+  
+      <!-- Applications Volume Mixers -->
+      <GridView ItemsSource="{x:Bind VM.SelectedDevice.Applications, Mode=OneWay}">
+        <GridView.ItemTemplate>
+          <DataTemplate x:DataType="models:ApplicationModel">
+  
+            <views:VolumeSlider DataContext="{x:Bind Mode=OneWay}"/>
+  
+          </DataTemplate>
+        </GridView.ItemTemplate>
+      </GridView>
+  
+    </StackPanel>
+  </StackPanel>
+
+  
+
+</Window>

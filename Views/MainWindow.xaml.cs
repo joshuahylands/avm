@@ -1,15 +1,20 @@
+using AVM.Helpers;
+using AVM.ViewModels;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml;
 using WinRT;
 
-namespace AVM;
+namespace AVM.Views;
 
 partial class MainWindow : Window
 {
-  SystemBackdropConfiguration? _backdropConfig;
-  MicaController? _micaController;
-  DesktopAcrylicController? _acrylicController;
+  private SystemBackdropConfiguration? _backdropConfig;
+  private MicaController? _micaController;
+  private DesktopAcrylicController? _acrylicController;
+
+  // The ViewModel for the Window. WinUI3's Window doesn't inherit from FrameworkElement therefore doesn't have a DataContext to store this
+  public MainWindowViewModel VM = new();
 
   public MainWindow()
   {
@@ -19,14 +24,19 @@ partial class MainWindow : Window
 
   void SetBackdrop()
   {
-    WindowsSystemDispatcherQueueHelper.EnsureWindowsSystemDispatcherQueueController();
+    if (!WindowsSystemDispatcherQueueHelper.EnsureWindowsSystemDispatcherQueueController())
+    {
+      return;
+    }
 
-    this.Activated += Window_Activated;
-    this.Closed += Window_Closed;
-    ((FrameworkElement) this.Content).ActualThemeChanged += Window_ThemeChanged;
+    Activated += Window_Activated;
+    Closed += Window_Closed;
+    ((FrameworkElement) Content).ActualThemeChanged += Window_ThemeChanged;
 
-    _backdropConfig = new SystemBackdropConfiguration();
-    _backdropConfig.IsInputActive = true;
+    _backdropConfig = new SystemBackdropConfiguration
+    {
+      IsInputActive = true
+    };
 
     SetConfigurationSourceTheme();
 
@@ -48,11 +58,11 @@ partial class MainWindow : Window
   {
     if (_backdropConfig == null) return;
 
-    switch (((FrameworkElement) this.Content).ActualTheme)
+    switch (((FrameworkElement) Content).ActualTheme)
     {
-      case ElementTheme.Dark:     _backdropConfig.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Dark; break;
-      case ElementTheme.Light:    _backdropConfig.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Light; break;
-      case ElementTheme.Default:  _backdropConfig.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Default; break;
+      case ElementTheme.Dark:     _backdropConfig.Theme = SystemBackdropTheme.Dark; break;
+      case ElementTheme.Light:    _backdropConfig.Theme = SystemBackdropTheme.Light; break;
+      case ElementTheme.Default:  _backdropConfig.Theme = SystemBackdropTheme.Default; break;
     }
   }
 
@@ -75,7 +85,7 @@ partial class MainWindow : Window
       _acrylicController = null;
     }
 
-    this.Activated -= Window_Activated;
+    Activated -= Window_Activated;
     _backdropConfig = null;
   }
 
