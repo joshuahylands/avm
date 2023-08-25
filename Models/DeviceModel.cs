@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using AVM.Interfaces;
 using CoreAudio;
 
@@ -61,7 +62,11 @@ class DeviceModel : IMixerDescriptor
     }
   }
 
-  public IEnumerable<ApplicationModel> Applications
+  public Icon MixerIcon {
+    get => SystemIcons.Application;
+  }
+
+  public IMixerDescriptor[] Children
   {
     get
     {
@@ -75,7 +80,7 @@ class DeviceModel : IMixerDescriptor
         }
       }
 
-      return applications;
+      return applications.ToArray();
     }
   }
 }

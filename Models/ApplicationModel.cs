@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using AVM.Interfaces;
 using CoreAudio;
 
@@ -73,4 +74,25 @@ class ApplicationModel : IMixerDescriptor
       }
     }
   }
+
+  public Icon MixerIcon
+  {
+    get
+    {
+      Icon icon = SystemIcons.Application;
+
+      if (!_sessionControl.IsSystemSoundsSession)
+      {
+        using var process = Process.GetProcessById((int) _sessionControl.ProcessID);
+        if (process.MainModule != null)
+        {
+          icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName) ?? SystemIcons.Application;
+        }
+      }
+
+      return icon;
+    }
+  }
+
+  public IMixerDescriptor[] Children { get => Array.Empty<IMixerDescriptor>(); }
 }
