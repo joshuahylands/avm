@@ -2,7 +2,9 @@ using AVM.Helpers;
 using AVM.ViewModels;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using WinRT;
 
 namespace AVM.Views;
@@ -20,6 +22,23 @@ partial class MainWindow : Window
   {
     InitializeComponent();
     SetBackdrop();
+
+    // Configure AppWindow Settings
+    AppWindow.IsShownInSwitchers = false;
+    AppWindow.Move(new(50, 60));
+
+    var presenter = OverlappedPresenter.Create();
+    presenter.IsAlwaysOnTop = true;
+    presenter.IsResizable = false;
+    presenter.SetBorderAndTitleBar(false, false);
+    AppWindow.SetPresenter(presenter);
+  }
+
+  private void StackPanel_Loaded(object sender, RoutedEventArgs e)
+  {
+    var panel = (StackPanel) sender;
+
+    AppWindow.Resize(new((int) panel.ActualWidth, (int) panel.ActualHeight));
   }
 
   void SetBackdrop()

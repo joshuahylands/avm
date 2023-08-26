@@ -5,10 +5,12 @@
   xmlns:viewmodels="using:AVM.ViewModels"
   xmlns:views="using:AVM.Views">
 
-  <StackPanel Orientation="Horizontal">
+  <StackPanel
+    Orientation="Horizontal"
+    HorizontalAlignment="Left">
 
-    <!-- This ViewModels VolumeSlider -->
-    <StackPanel>
+    <!-- Display the mixer represented by the current view model -->
+    <StackPanel Padding="12">
 
       <Slider
         Height="100"
@@ -18,6 +20,7 @@
 
       <Image
         Width="32"
+        Margin="0,8,0,0"
         Opacity="{Binding ApplicationIconOpacity}"
         Source="{Binding ApplicationIcon}"
         PointerPressed="Image_PointerPressed"

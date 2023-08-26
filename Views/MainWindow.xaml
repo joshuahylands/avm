@@ -5,13 +5,19 @@
   xmlns:views="using:AVM.Views"
   Title="AVM">
 
-  <StackPanel>
+  <StackPanel
+    Loaded="StackPanel_Loaded"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top">
 
     <!-- Device Selector -->
     <ComboBox
       ItemsSource="{x:Bind VM.Devices}"
       DisplayMemberPath="Name"
-      SelectedItem="{x:Bind VM.SelectedDevice, Mode=TwoWay}"/>
+      SelectedItem="{x:Bind VM.SelectedDevice, Mode=TwoWay}"
+      HorizontalAlignment="Stretch"
+      Background="Transparent"
+      BorderBrush="Transparent"/>
 
     <!-- Root Mixer -->
     <views:VolumeSlider DataContext="{x:Bind VM.SelectedDevice, Mode=OneWay}"/>
