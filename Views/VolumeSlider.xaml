@@ -1,45 +1,24 @@
 <UserControl
   x:Class="AVM.Views.VolumeSlider"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:viewmodels="using:AVM.ViewModels"
-  xmlns:views="using:AVM.Views">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-  <StackPanel
-    Orientation="Horizontal"
-    HorizontalAlignment="Left">
+  <StackPanel Padding="12">
 
-    <!-- Display the mixer represented by the current view model -->
-    <StackPanel Padding="12">
+    <Slider
+      Height="100"
+      Orientation="Vertical"
+      IsEnabled="{Binding IsSliderEnabled}"
+      Value="{Binding Volume, Mode=TwoWay}"/>
 
-      <Slider
-        Height="100"
-        Orientation="Vertical"
-        IsEnabled="{Binding IsSliderEnabled}"
-        Value="{Binding Volume, Mode=TwoWay}"/>
-
-      <Image
-        Width="32"
-        Margin="0,8,0,0"
-        Opacity="{Binding ApplicationIconOpacity}"
-        Source="{Binding ApplicationIcon}"
-        PointerPressed="Image_PointerPressed"
-        ToolTipService.ToolTip="{Binding Name}"
-        ToolTipService.Placement="Bottom"/>
-
-    </StackPanel>
-
-    <!-- Recursively display this mixers children -->
-    <GridView ItemsSource="{Binding Children}">
-      <GridView.ItemTemplate>
-        <DataTemplate x:DataType="viewmodels:VolumeSliderViewModel">
-
-          <!-- Child mixer -->
-          <views:VolumeSlider DataContext="{x:Bind Mode=OneWay}"/>
-
-        </DataTemplate>
-      </GridView.ItemTemplate>
-    </GridView>
+    <Image
+      Width="32"
+      Margin="0,8,0,0"
+      Opacity="{Binding ApplicationIconOpacity}"
+      Source="{Binding ApplicationIcon}"
+      PointerPressed="Image_PointerPressed"
+      ToolTipService.ToolTip="{Binding Name}"
+      ToolTipService.Placement="Bottom"/>
 
   </StackPanel>
 

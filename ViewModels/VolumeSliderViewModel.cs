@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using AVM.Interfaces;
@@ -61,21 +60,6 @@ partial class VolumeSliderViewModel : ObservableObject
       image.SetSource(stream.AsRandomAccessStream());
 
       return image;
-    }
-  }
-
-  public VolumeSliderViewModel[] Children
-  {
-    get
-    {
-      var childViewModels = new List<VolumeSliderViewModel>();
-
-      foreach (var child in _mixerDescriptor.Children)
-      {
-        childViewModels.Add(new VolumeSliderViewModel(child));
-      }
-
-      return childViewModels.ToArray();
     }
   }
 

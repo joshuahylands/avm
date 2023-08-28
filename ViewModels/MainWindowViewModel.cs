@@ -8,22 +8,50 @@ namespace AVM.ViewModels;
 
 partial class MainWindowViewModel : ObservableObject
 {
-  public List<VolumeSliderViewModel> Devices;
+  public List<DeviceModel> Devices;
+
+  private int _selectedDeviceIndex;
+  public int SelectedDeviceIndex
+  {
+    get => _selectedDeviceIndex;
+    set
+    {
+      SetProperty(ref _selectedDeviceIndex, value);
+
+      InitializeMixers();
+    }
+  }
 
   [ObservableProperty]
-  private VolumeSliderViewModel _selectedDevice;
+  private List<VolumeSliderViewModel> _mixers = new();
 
   public MainWindowViewModel()
   {
     var deviceEnumerator = new MMDeviceEnumerator(Guid.NewGuid());
 
-    Devices = new List<VolumeSliderViewModel>();
+    Devices = new List<DeviceModel>();
 
     foreach (var device in deviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
     {
-      Devices.Add(new VolumeSliderViewModel(new DeviceModel(device)));
+      Devices.Add(new DeviceModel(device));
     }
 
-    SelectedDevice = Devices[0];
+    SelectedDeviceIndex = 0;
+  }
+
+  private void InitializeMixers()
+  {
+    var selectedDevice = Devices[SelectedDeviceIndex];
+    var volumeSliderViewModels = new List<VolumeSliderViewModel>
+    {
+      new VolumeSliderViewModel(selectedDevice)
+    };
+
+    foreach (var mixerDescriptor in selectedDevice.Children)
+    {
+      volumeSliderViewModels.Add(new VolumeSliderViewModel(mixerDescriptor));
+    }
+
+    Mixers = volumeSliderViewModels;
   }
 }
