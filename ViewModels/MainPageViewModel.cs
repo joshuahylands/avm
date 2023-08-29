@@ -6,7 +6,7 @@ using CoreAudio;
 
 namespace AVM.ViewModels;
 
-partial class MainWindowViewModel : ObservableObject
+partial class MainPageViewModel : ObservableObject
 {
   public List<DeviceModel> Devices;
 
@@ -25,7 +25,7 @@ partial class MainWindowViewModel : ObservableObject
   [ObservableProperty]
   private List<VolumeSliderViewModel> _mixers = new();
 
-  public MainWindowViewModel()
+  public MainPageViewModel()
   {
     var deviceEnumerator = new MMDeviceEnumerator(Guid.NewGuid());
 

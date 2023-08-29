@@ -5,7 +5,7 @@ namespace AVM;
 
 partial class App : Application
 {
-  private MainWindow? _window;
+  public readonly static MainWindow MainWindow = new();
 
   public App()
   {
@@ -14,7 +14,6 @@ partial class App : Application
 
   protected override void OnLaunched(LaunchActivatedEventArgs e)
   {
-    _window = new MainWindow();
-    _window.Activate();
+    MainWindow.Activate();
   }
 }
