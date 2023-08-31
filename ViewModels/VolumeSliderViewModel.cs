@@ -21,10 +21,14 @@ partial class VolumeSliderViewModel : ObservableObject
     get => _mixerDescriptor.Name;
   }
 
+  private int _volume;
   public int Volume
   {
     get => _mixerDescriptor.Volume;
-    set => _mixerDescriptor.Volume = value;
+    set {
+      _mixerDescriptor.Volume = value;
+      SetProperty(ref _volume, value);
+    }
   }
 
   public bool Muted

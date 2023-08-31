@@ -19,11 +19,16 @@ partial class MainPageViewModel : ObservableObject
       SetProperty(ref _selectedDeviceIndex, value);
 
       InitializeMixers();
+
+      SelectedMixerIndex = 0;
     }
   }
 
   [ObservableProperty]
   private List<VolumeSliderViewModel> _mixers = new();
+
+  [ObservableProperty]
+  private int _selectedMixerIndex = 0;
 
   public MainPageViewModel()
   {

@@ -9,6 +9,26 @@
     <viewmodels:MainPageViewModel/>
   </Page.DataContext>
 
+  <Page.KeyboardAccelerators>
+    <!-- Hide Window -->
+    <KeyboardAccelerator Key="Escape" Invoked="HideWindow"/>
+
+    <!-- Modify SelectedDeviceIndex -->
+    <KeyboardAccelerator Key="PageUp" Invoked="DecrementSelectedDeviceIndex"/>
+    <KeyboardAccelerator Key="PageDown" Invoked="IncrementSelectedDeviceIndex"/>
+
+    <!-- Modify SelectedMixerIndex -->
+    <KeyboardAccelerator Key="Left" Invoked="DecrementSelectedMixerIndex"/>
+    <KeyboardAccelerator Key="Right" Invoked="IncrementSelectedMixerIndex"/>
+
+    <!-- Increase and Decrease Volume -->
+    <KeyboardAccelerator Key="Up" Invoked="IncreaseVolume"/>
+    <KeyboardAccelerator Key="Down" Invoked="DecreaseVolume"/>
+
+    <!-- Toggle Mute -->
+    <KeyboardAccelerator Key="M" Invoked="ToggleMute"/>
+  </Page.KeyboardAccelerators>
+
   <StackPanel
     Loaded="StackPanel_Loaded"
     HorizontalAlignment="Left"
@@ -24,7 +44,9 @@
       BorderBrush="Transparent"/>
 
     <!-- Mixers -->
-    <GridView SelectedIndex="0" ItemsSource="{Binding Mixers}">
+    <GridView
+      SelectedIndex="{Binding SelectedMixerIndex, Mode=TwoWay}"
+      ItemsSource="{Binding Mixers}">
       <GridView.ItemTemplate>
         <DataTemplate x:DataType="viewmodels:VolumeSliderViewModel">
           <views:VolumeSlider DataContext="{Binding}"/>
