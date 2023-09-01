@@ -31,4 +31,13 @@ public partial class MainWindow : Window
     presenter.SetBorderAndTitleBar(false, false);
     AppWindow.SetPresenter(presenter);
   }
+
+  private void Window_Activated(object sender, WindowActivatedEventArgs args)
+  {
+    // WindowActivationState changes to Deactivated when the window loses focus
+    if (args.WindowActivationState == WindowActivationState.Deactivated)
+    {
+      AppWindow.Hide();
+    }
+  }
 }

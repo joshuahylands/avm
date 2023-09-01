@@ -53,6 +53,8 @@
         </DataTemplate>
       </GridView.ItemTemplate>
     </GridView>
+
+    <views:TrayIcon/>
   
   </StackPanel>
 

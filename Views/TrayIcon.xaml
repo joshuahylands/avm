@@ -1,0 +1,27 @@
+<UserControl
+  x:Class="AVM.Views.TrayIcon"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:tb="using:H.NotifyIcon">
+
+  <tb:TaskbarIcon
+    x:Name="TrayIconControl"
+    ContextMenuMode="SecondWindow">
+
+    <tb:TaskbarIcon.GeneratedIcon>
+      <tb:GeneratedIcon Background="Red"/>
+    </tb:TaskbarIcon.GeneratedIcon>
+
+    <tb:TaskbarIcon.ContextFlyout>
+
+      <MenuFlyout>
+        <MenuFlyoutItem Text="Open" Click="ShowMainWindow"/>
+        <MenuFlyoutSeparator/>
+        <MenuFlyoutItem Text="Exit" Click="Exit"/>
+      </MenuFlyout>
+
+    </tb:TaskbarIcon.ContextFlyout>
+
+  </tb:TaskbarIcon>
+
+</UserControl>
