@@ -1,27 +1,33 @@
-<UserControl
-  x:Class="AVM.Views.TrayIcon"
+<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:tb="using:H.NotifyIcon">
 
+  <!-- Commands -->
+  <XamlUICommand x:Key="ShowMainWindow"/>
+  <XamlUICommand x:Key="ExitApplication"/>
+
+  <!-- TrayIcon -->
   <tb:TaskbarIcon
-    x:Name="TrayIconControl"
+    x:Key="TrayIcon"
     ContextMenuMode="SecondWindow">
 
+    <!-- Generated Icon -->
     <tb:TaskbarIcon.GeneratedIcon>
       <tb:GeneratedIcon Background="Red"/>
     </tb:TaskbarIcon.GeneratedIcon>
 
+    <!-- Context Menu -->
     <tb:TaskbarIcon.ContextFlyout>
 
       <MenuFlyout>
-        <MenuFlyoutItem Text="Open" Click="ShowMainWindow"/>
+        <MenuFlyoutItem Text="Open" Command="{StaticResource ShowMainWindow}"/>
         <MenuFlyoutSeparator/>
-        <MenuFlyoutItem Text="Exit" Click="Exit"/>
+        <MenuFlyoutItem Text="Exit" Command="{StaticResource ExitApplication}"/>
       </MenuFlyout>
 
     </tb:TaskbarIcon.ContextFlyout>
 
   </tb:TaskbarIcon>
 
-</UserControl>
+</ResourceDictionary>
