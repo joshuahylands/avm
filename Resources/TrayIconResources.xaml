@@ -5,6 +5,7 @@
 
   <!-- Commands -->
   <XamlUICommand x:Key="ShowMainWindow"/>
+  <XamlUICommand x:Key="ShowSettingsWindow"/>
   <XamlUICommand x:Key="ExitApplication"/>
 
   <!-- TrayIcon -->
@@ -22,6 +23,7 @@
 
       <MenuFlyout>
         <MenuFlyoutItem Text="Open" Command="{StaticResource ShowMainWindow}"/>
+        <MenuFlyoutItem Text="Settings" Command="{StaticResource ShowSettingsWindow}"/>
         <MenuFlyoutSeparator/>
         <MenuFlyoutItem Text="Exit" Command="{StaticResource ExitApplication}"/>
       </MenuFlyout>
