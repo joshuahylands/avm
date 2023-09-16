@@ -14,19 +14,19 @@
     <KeyboardAccelerator Key="Escape" Invoked="HideWindow"/>
 
     <!-- Modify SelectedDeviceIndex -->
-    <KeyboardAccelerator Key="PageUp" Invoked="DecrementSelectedDeviceIndex"/>
-    <KeyboardAccelerator Key="PageDown" Invoked="IncrementSelectedDeviceIndex"/>
+    <KeyboardAccelerator Key="{Binding SelectedDeviceUp}" Invoked="DecrementSelectedDeviceIndex"/>
+    <KeyboardAccelerator Key="{Binding SelectedDeviceDown}" Invoked="IncrementSelectedDeviceIndex"/>
 
     <!-- Modify SelectedMixerIndex -->
-    <KeyboardAccelerator Key="Left" Invoked="DecrementSelectedMixerIndex"/>
-    <KeyboardAccelerator Key="Right" Invoked="IncrementSelectedMixerIndex"/>
+    <KeyboardAccelerator Key="{Binding SelectedMixerUp}" Invoked="DecrementSelectedMixerIndex"/>
+    <KeyboardAccelerator Key="{Binding SelectedMixerDown}" Invoked="IncrementSelectedMixerIndex"/>
 
     <!-- Increase and Decrease Volume -->
-    <KeyboardAccelerator Key="Up" Invoked="IncreaseVolume"/>
-    <KeyboardAccelerator Key="Down" Invoked="DecreaseVolume"/>
+    <KeyboardAccelerator Key="{Binding VolumeUp}" Invoked="IncreaseVolume"/>
+    <KeyboardAccelerator Key="{Binding VolumeUp}" Invoked="DecreaseVolume"/>
 
     <!-- Toggle Mute -->
-    <KeyboardAccelerator Key="M" Invoked="ToggleMute"/>
+    <KeyboardAccelerator Key="{Binding Mute}" Invoked="ToggleMute"/>
   </Page.KeyboardAccelerators>
 
   <StackPanel

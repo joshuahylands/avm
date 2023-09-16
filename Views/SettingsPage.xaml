@@ -2,6 +2,23 @@
   x:Class="AVM.Views.SettingsPage"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:viewmodels="using:AVM.ViewModels">
+  xmlns:viewmodels="using:AVM.ViewModels"
+  xmlns:views="using:AVM.Views">
+
+  <Page.DataContext>
+    <viewmodels:KeybindViewModel/>
+  </Page.DataContext>
+
+  <StackPanel>
+
+    <views:KeybindInput Header="Previous Device" VirtualKey="{Binding SelectedDeviceUp, Mode=TwoWay}"/>
+    <views:KeybindInput Header="Next Device" VirtualKey="{Binding SelectedDeviceDown, Mode=TwoWay}"/>
+    <views:KeybindInput Header="Previous Mixer" VirtualKey="{Binding SelectedMixerUp, Mode=TwoWay}"/>
+    <views:KeybindInput Header="Next Device" VirtualKey="{Binding SelectedMixerDown, Mode=TwoWay}"/>
+    <views:KeybindInput Header="Volume Up" VirtualKey="{Binding VolumeUp, Mode=TwoWay}"/>
+    <views:KeybindInput Header="Volume Down" VirtualKey="{Binding VolumeDown, Mode=TwoWay}"/>
+    <views:KeybindInput Header="Mute" VirtualKey="{Binding Mute, Mode=TwoWay}"/>
+
+  </StackPanel>
 
 </Page>

@@ -25,7 +25,7 @@ partial class MainPage : Page
   
   private void HideWindow(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
   {
-    App.MainWindow.AppWindow.Hide();
+    App.MainWindow?.AppWindow.Hide();
     args.Handled = true;
   }
 
@@ -118,6 +118,6 @@ partial class MainPage : Page
   {
     var panel = (StackPanel) sender;
 
-    App.MainWindow.AppWindow.Resize(new((int) panel.ActualWidth, (int) panel.ActualHeight));
+    App.MainWindow?.AppWindow.Resize(new((int) panel.ActualWidth, (int) panel.ActualHeight));
   }  
 }

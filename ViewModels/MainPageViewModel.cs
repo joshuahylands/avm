@@ -6,7 +6,7 @@ using CoreAudio;
 
 namespace AVM.ViewModels;
 
-partial class MainPageViewModel : ObservableObject
+partial class MainPageViewModel : KeybindViewModel
 {
   public List<DeviceModel> Devices;
 

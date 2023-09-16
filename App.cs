@@ -7,7 +7,7 @@ namespace AVM;
 
 partial class App : Application
 {
-  public readonly static MainWindow MainWindow = new();
+  public static MainWindow? MainWindow { get; private set; }
 
   private TaskbarIcon? _trayIcon;
   private SettingsWindow? _settingsWindow;
@@ -28,7 +28,12 @@ partial class App : Application
     _trayIcon.ForceCreate();
   }
 
-  private void ShowMainWindow(object sender, ExecuteRequestedEventArgs args) => MainWindow.Activate();
+  private void ShowMainWindow(object sender, ExecuteRequestedEventArgs args)
+  {
+    MainWindow = new();
+    MainWindow?.Activate();
+  }
+
   private void ShowSettingsWindow(object sender, ExecuteRequestedEventArgs args)
   {
     _settingsWindow = new SettingsWindow();
@@ -37,7 +42,7 @@ partial class App : Application
 
   private void ExitApplication(object sender, ExecuteRequestedEventArgs args)
   {
-    MainWindow.Close();
+    MainWindow?.Close();
     _settingsWindow?.Close();
 
     _trayIcon?.Dispose();

@@ -14,7 +14,9 @@
       Padding="8"
       Text="AVM Settings"/>
 
-    <views:SettingsPage Grid.Row="1"/>
+    <views:SettingsPage
+      Grid.Row="1"
+      Margin="8"/>
 
   </Grid>
 
