@@ -11,7 +11,9 @@
   <!-- TrayIcon -->
   <tb:TaskbarIcon
     x:Key="TrayIcon"
-    ContextMenuMode="SecondWindow">
+    ContextMenuMode="SecondWindow"
+    LeftClickCommand="{StaticResource ShowMainWindow}"
+    NoLeftClickDelay="True">
 
     <!-- Generated Icon -->
     <tb:TaskbarIcon.GeneratedIcon>
@@ -22,9 +24,7 @@
     <tb:TaskbarIcon.ContextFlyout>
 
       <MenuFlyout>
-        <MenuFlyoutItem Text="Open" Command="{StaticResource ShowMainWindow}"/>
         <MenuFlyoutItem Text="Settings" Command="{StaticResource ShowSettingsWindow}"/>
-        <MenuFlyoutSeparator/>
         <MenuFlyoutItem Text="Exit" Command="{StaticResource ExitApplication}"/>
       </MenuFlyout>
 

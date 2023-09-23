@@ -1,16 +1,23 @@
+using System;
+using System.Runtime.InteropServices;
 using AVM.Views;
 using H.NotifyIcon;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Input;
+using WinRT.Interop;
 
 namespace AVM;
 
 partial class App : Application
 {
-  public static MainWindow? MainWindow { get; private set; }
+  public readonly static MainWindow MainWindow = new();
 
   private TaskbarIcon? _trayIcon;
   private SettingsWindow? _settingsWindow;
+
+  [LibraryImport("user32.dll")]
+  [return: MarshalAs(UnmanagedType.Bool)]
+  private static partial bool SetForegroundWindow(IntPtr hWnd);
 
   public App()
   {
@@ -26,12 +33,18 @@ partial class App : Application
 
     _trayIcon = (TaskbarIcon) Resources["TrayIcon"];
     _trayIcon.ForceCreate();
+
+    // Start the window hidden
+    MainWindow.Activate();
+    MainWindow.Hide();
   }
 
   private void ShowMainWindow(object sender, ExecuteRequestedEventArgs args)
   {
-    MainWindow = new();
-    MainWindow?.Activate();
+    MainWindow.Show();
+
+    // Set focus to the window. WinUI 3 doesn't focus when calling Show on a Window
+    SetForegroundWindow(WindowNative.GetWindowHandle(MainWindow));
   }
 
   private void ShowSettingsWindow(object sender, ExecuteRequestedEventArgs args)
@@ -42,7 +55,7 @@ partial class App : Application
 
   private void ExitApplication(object sender, ExecuteRequestedEventArgs args)
   {
-    MainWindow?.Close();
+    MainWindow.Close();
     _settingsWindow?.Close();
 
     _trayIcon?.Dispose();

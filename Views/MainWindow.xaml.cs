@@ -23,7 +23,6 @@ public partial class MainWindow : Window
 
     // Configure AppWindow Settings
     AppWindow.IsShownInSwitchers = false;
-    AppWindow.Move(new(50, 60));
 
     var presenter = OverlappedPresenter.Create();
     presenter.IsAlwaysOnTop = true;

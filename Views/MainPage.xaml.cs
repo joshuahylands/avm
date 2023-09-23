@@ -1,5 +1,6 @@
 using System;
 using AVM.ViewModels;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
@@ -25,7 +26,7 @@ partial class MainPage : Page
   
   private void HideWindow(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
   {
-    App.MainWindow?.AppWindow.Hide();
+    App.MainWindow.AppWindow.Hide();
     args.Handled = true;
   }
 
@@ -118,6 +119,14 @@ partial class MainPage : Page
   {
     var panel = (StackPanel) sender;
 
-    App.MainWindow?.AppWindow.Resize(new((int) panel.ActualWidth, (int) panel.ActualHeight));
+    var displayRect = DisplayArea.Primary.WorkArea;
+
+    // Move to bottom right of the screen
+    App.MainWindow.AppWindow.MoveAndResize(new(
+      displayRect.Width - (int) panel.ActualWidth,    // X
+      displayRect.Height - (int) panel.ActualHeight,  // Y
+      (int) panel.ActualWidth,                        // Width
+      (int) panel.ActualHeight                        // Height
+    ));
   }  
 }
